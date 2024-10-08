@@ -1,6 +1,19 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using Carter;
 
-app.MapGet("/", () => "Hello World!");
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-app.Run();
+#region Configure Services
+
+builder.Services.AddCarter();
+builder.Services.AddProblemDetails();
+
+#endregion
+
+WebApplication application = builder.Build();
+
+application.UseStatusCodePages();
+application.UseExceptionHandler();
+
+application.MapCarter();
+
+application.Run();
