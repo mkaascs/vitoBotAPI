@@ -7,5 +7,5 @@ public class Chat : Entity {
     [MaxLength(128)]
     public string? Name { get; init; }
 
-    public IEnumerable<Message> Messages { get; init; } = [];
+    public ICollection<Message> Messages { get; init; } = [];
 }

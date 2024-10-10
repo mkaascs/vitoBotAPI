@@ -4,5 +4,6 @@ public enum ContentType {
     Text,
     Gif,
     Picture,
-    Sticker
+    Sticker,
+    Video
 }
