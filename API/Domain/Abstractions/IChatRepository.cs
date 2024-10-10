@@ -13,9 +13,15 @@ public interface IChatRepository {
     Task<IEnumerable<Chat>> GetChatsAsync();
 
     /// <summary>
+    /// Asynchronous method that checks if there is already a message with this id
+    /// </summary>
+    /// <param name="chat">Instance of <see cref="Chat"/>></param>
+    /// <returns>Returns true if chat with the id already exists and false if it doesn't</returns>
+    Task<bool> DoesAlreadyExist(Chat chat);
+
+    /// <summary>
     /// Asynchronous method that adds a new instance of the <see cref="Chat"/> class
     /// </summary>
     /// <param name="newChat">Instance of <see cref="Chat"/> which need to create</param>
-    /// <returns>Returns true if instance of <see cref="Chat"/> was successfully added. Returns false if chat was already exist</returns>
-    Task<bool> CreateChatAsync(Chat newChat);
+    Task CreateChatAsync(Chat newChat);
 }

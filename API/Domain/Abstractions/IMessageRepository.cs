@@ -22,11 +22,17 @@ public interface IMessageRepository {
     /// <returns>Returns a random instance of <see cref="Message"/> from the specific chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with the specific id doesn't exist</exception>
     Task<Message> GetRandomMessageFromChatAsync(ulong chatId);
+
+    /// <summary>
+    /// Asynchronous method that checks if there is already a message with this content and content type
+    /// </summary>
+    /// <param name="message">Instance of <see cref="Message"/>></param>
+    /// <returns>Returns true if message with the content and content type already exists and false if it doesn't</returns>
+    Task<bool> DoesAlreadyExist(Message message);
     
     /// <summary>
     /// Asynchronous method that adds a new instance of the <see cref="Message"/> class
     /// </summary>
     /// <param name="newMessage">Instance of <see cref="Message"/> which need to create</param>
-    /// <returns>Returns true if instance of <see cref="Message"/> was successfully added. Returns false if message with this content was already exist</returns>
-    Task<bool> AddNewMessageAsync(Message newMessage);
+    Task AddNewMessageAsync(Message newMessage);
 }
