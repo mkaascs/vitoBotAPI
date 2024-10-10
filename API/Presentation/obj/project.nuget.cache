@@ -1,20 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "fHw3qHOjia/mBeC8LsjG/+U+tluWSwNFEYUv59WI9wcwVxV7hT1rRGdGM47xlCGUACCx+QOYlyRBChfhlwlAHQ==",
+  "dgSpecHash": "UrcrWblLjbHo3ZqeAW1mIhVU3B0Q1liUAAMHVQI8LZBHAPZ3h0OK45nxWHxsaqQMY0bPXfXFc3Py4V0OfBVpIw==",
   "success": true,
   "projectFilePath": "/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/Presentation.csproj",
   "expectedPackageFiles": [
-    "/Users/makaasz/.nuget/packages/carter/8.2.0/carter.8.2.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/fluentvalidation/11.10.0/fluentvalidation.11.10.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/microsoft.codeanalysis.analyzers/3.3.4/microsoft.codeanalysis.analyzers.3.3.4.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/microsoft.codeanalysis.common/4.7.0/microsoft.codeanalysis.common.4.7.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/microsoft.codeanalysis.csharp/4.7.0/microsoft.codeanalysis.csharp.4.7.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/microsoft.extensions.dependencymodel/8.0.0/microsoft.extensions.dependencymodel.8.0.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/system.collections.immutable/7.0.0/system.collections.immutable.7.0.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/system.reflection.metadata/7.0.0/system.reflection.metadata.7.0.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512"
+    "/Users/makaasz/.nuget/packages/fluentvalidation/11.10.0/fluentvalidation.11.10.0.nupkg.sha512"
   ],
   "logs": []
 }

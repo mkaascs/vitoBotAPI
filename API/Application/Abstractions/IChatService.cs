@@ -1,3 +1,4 @@
+using Application.Exceptions;
 using Application.DTO.Commands;
 using Application.DTO.ViewModels;
 
@@ -20,5 +21,6 @@ public interface IChatService {
     /// <param name="command">Instance of <see cref="RegisterChatCommand"/> which need to create an instance of <see cref="Domain.Entities.Chat"/></param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>True if chat was registered successfully or false if chat with this id already exists</returns>
+    /// <exception cref="ValidationProblemException">Throws if command model is not valid</exception>
     Task<bool> RegisterNewChatAsync(RegisterChatCommand command, CancellationToken cancellationToken=default);
 }

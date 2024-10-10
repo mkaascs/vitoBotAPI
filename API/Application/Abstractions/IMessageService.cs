@@ -1,6 +1,7 @@
 using Domain.Exceptions;
 using Domain.Entities.Enums;
 
+using Application.Exceptions;
 using Application.DTO.Commands;
 using Application.DTO.ViewModels;
 
@@ -55,5 +56,6 @@ public interface IMessageService {
     /// <param name="command">Instance of <see cref="CreateMessageCommand"/> which need to create an instance of <see cref="Domain.Entities.Message"/></param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>True if message was added successfully or false if message with this content and content type already exists</returns>
+    /// <exception cref="ValidationProblemException">Throws if command model is not valid</exception>
     Task<bool> AddNewMessageAsync(ulong chatId, CreateMessageCommand command, CancellationToken cancellationToken=default);
 }

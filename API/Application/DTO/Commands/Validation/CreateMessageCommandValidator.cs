@@ -2,9 +2,7 @@ using FluentValidation;
 
 using Domain.Entities.Enums;
 
-using Application.DTO.Commands;
-
-namespace Presentation.Validation;
+namespace Application.DTO.Commands.Validation;
 
 public class CreateMessageCommandValidator : AbstractValidator<CreateMessageCommand> {
     public CreateMessageCommandValidator() {
