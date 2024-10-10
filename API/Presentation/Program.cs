@@ -1,4 +1,5 @@
 using Carter;
+using Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddProblemDetails();
 WebApplication application = builder.Build();
 
 application.UseStatusCodePages();
-application.UseExceptionHandler();
+application.UseMinimalApiExceptionHandler();
 
 application.MapCarter();
 

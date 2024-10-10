@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Zog7HIrMtk4vD+2uPiegBHXcFXyY5nmjgp0dnZCwdkGIAKk5kj5NXiORV69qRuQgzpWEkoCvxsHyJgXaJTbt9Q==",
+  "dgSpecHash": "fHw3qHOjia/mBeC8LsjG/+U+tluWSwNFEYUv59WI9wcwVxV7hT1rRGdGM47xlCGUACCx+QOYlyRBChfhlwlAHQ==",
   "success": true,
   "projectFilePath": "/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/Presentation.csproj",
   "expectedPackageFiles": [
     "/Users/makaasz/.nuget/packages/carter/8.2.0/carter.8.2.0.nupkg.sha512",
-    "/Users/makaasz/.nuget/packages/fluentvalidation/11.8.0/fluentvalidation.11.8.0.nupkg.sha512",
+    "/Users/makaasz/.nuget/packages/fluentvalidation/11.10.0/fluentvalidation.11.10.0.nupkg.sha512",
     "/Users/makaasz/.nuget/packages/microsoft.codeanalysis.analyzers/3.3.4/microsoft.codeanalysis.analyzers.3.3.4.nupkg.sha512",
     "/Users/makaasz/.nuget/packages/microsoft.codeanalysis.common/4.7.0/microsoft.codeanalysis.common.4.7.0.nupkg.sha512",
     "/Users/makaasz/.nuget/packages/microsoft.codeanalysis.csharp/4.7.0/microsoft.codeanalysis.csharp.4.7.0.nupkg.sha512",

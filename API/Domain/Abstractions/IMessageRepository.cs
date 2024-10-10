@@ -11,28 +11,32 @@ public interface IMessageRepository {
     /// Asynchronous method to obtain instances of the <see cref="Message"/> class in a specific chat
     /// </summary>
     /// <param name="chatId">Unique id of the specific chat</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Returns a <see cref="IEnumerable{T}"/> of <see cref="Message"/> instances from the specific chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with the specific id doesn't exist</exception>
-    Task<IEnumerable<Message>> GetMessagesFromChatAsync(ulong chatId);
+    Task<IEnumerable<Message>> GetMessagesFromChatAsync(ulong chatId, CancellationToken cancellationToken=default);
 
     /// <summary>
     /// Asynchronous method to obtain random instance of the <see cref="Message"/> class in a specific chat
     /// </summary>
     /// <param name="chatId">Unique id of the specific chat</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Returns a random instance of <see cref="Message"/> from the specific chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with the specific id doesn't exist</exception>
-    Task<Message> GetRandomMessageFromChatAsync(ulong chatId);
+    Task<Message> GetRandomMessageFromChatAsync(ulong chatId, CancellationToken cancellationToken=default);
 
     /// <summary>
     /// Asynchronous method that checks if there is already a message with this content and content type
     /// </summary>
     /// <param name="message">Instance of <see cref="Message"/>></param>
+    /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Returns true if message with the content and content type already exists and false if it doesn't</returns>
-    Task<bool> DoesAlreadyExist(Message message);
-    
+    Task<bool> DoesAlreadyExist(Message message, CancellationToken cancellationToken=default);
+
     /// <summary>
     /// Asynchronous method that adds a new instance of the <see cref="Message"/> class
     /// </summary>
     /// <param name="newMessage">Instance of <see cref="Message"/> which need to create</param>
-    Task AddNewMessageAsync(Message newMessage);
+    /// <param name="cancellationToken">Cancellation token</param>
+    Task AddNewMessageAsync(Message newMessage, CancellationToken cancellationToken=default);
 }
