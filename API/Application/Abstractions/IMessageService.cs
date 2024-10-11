@@ -35,9 +35,9 @@ public interface IMessageService {
     /// </summary>
     /// <param name="chatId">Unique id of the specific chat</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Returns a random instance of <see cref="MessageViewModel"/> from the specific chat</returns>
+    /// <returns>Returns a random instance of <see cref="MessageViewModel"/> from the specific chat or null if there is no messages in the chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with current id doesn't exist</exception>
-    Task<MessageViewModel> GetRandomMessageFromChatAsync(ulong chatId, CancellationToken cancellationToken=default);
+    Task<MessageViewModel?> GetRandomMessageFromChatAsync(ulong chatId, CancellationToken cancellationToken=default);
 
     /// <summary>
     /// Asynchronous method to obtain random instance of the <see cref="MessageViewModel"/> class of a certain type in a specific chat
@@ -45,9 +45,9 @@ public interface IMessageService {
     /// <param name="chatId">Unique id of the specific chat</param>
     /// <param name="contentType">Message type to return</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Returns a random instance of <see cref="MessageViewModel"/> of a certain type from the specific chat</returns>
+    /// <returns>Returns a random instance of <see cref="MessageViewModel"/> of a certain type from the specific chat or null if there is no messages in the chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with current id doesn't exist</exception>
-    Task<MessageViewModel> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType, CancellationToken cancellationToken=default);
+    Task<MessageViewModel?> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType, CancellationToken cancellationToken=default);
 
     /// <summary>
     /// Asynchronous method that adds a new instance of the <see cref="Domain.Entities.Message"/> class if there are no messages with this content and content type

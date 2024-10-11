@@ -23,14 +23,14 @@ public class MessageRepository(ChatRepository chatRepository, ApplicationDbConte
             .Where(message => message.Type.Equals(contentType));
     }
 
-    public async Task<Message> GetRandomMessageFromChatAsync(ulong chatId, CancellationToken cancellationToken=default) {
+    public async Task<Message?> GetRandomMessageFromChatAsync(ulong chatId, CancellationToken cancellationToken=default) {
         Chat foundChat = await chatRepository.GetChatByIdAsync(chatId, cancellationToken)
             ?? throw new ChatWasNotFoundException(chatId);
 
         return GetRandomMessageFromEnumerable(foundChat.Messages);
     }
 
-    public async Task<Message> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType,
+    public async Task<Message?> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType,
         CancellationToken cancellationToken=default) {
         
         Chat foundChat = await chatRepository.GetChatByIdAsync(chatId, cancellationToken)
@@ -59,9 +59,11 @@ public class MessageRepository(ChatRepository chatRepository, ApplicationDbConte
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    private static Message GetRandomMessageFromEnumerable(IEnumerable<Message> messages) {
+    private static Message? GetRandomMessageFromEnumerable(IEnumerable<Message> messages) {
         Random random = new();
         IList<Message> messagesList = messages.ToList();
-        return messagesList[random.Next(0, messagesList.Count)];
+        return messagesList.Count == 0 
+            ? default 
+            : messagesList[random.Next(0, messagesList.Count)];
     }
 }

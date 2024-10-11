@@ -15,7 +15,7 @@ internal static class DtoExtensions {
         => new() {
             ChatId = chatId,
             Content = command.Content,
-            Type = Enum.Parse<ContentType>(command.Type)
+            Type = Enum.Parse<ContentType>(command.Type, true)
         };
 
     public static ChatViewModel ToViewModel(this Chat chat)

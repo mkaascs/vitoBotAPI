@@ -32,9 +32,9 @@ public interface IMessageRepository {
     /// </summary>
     /// <param name="chatId">Unique id of the specific chat</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Returns a random instance of <see cref="Message"/> from the specific chat</returns>
+    /// <returns>Returns a random instance of <see cref="Message"/> from the specific chat or null if there is no messages in the chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with the specific id doesn't exist</exception>
-    Task<Message> GetRandomMessageFromChatAsync(ulong chatId, CancellationToken cancellationToken=default);
+    Task<Message?> GetRandomMessageFromChatAsync(ulong chatId, CancellationToken cancellationToken=default);
 
     /// <summary>
     /// Asynchronous method to obtain random instance of the <see cref="Message"/> class of a certain type in a specific chat
@@ -42,9 +42,9 @@ public interface IMessageRepository {
     /// <param name="chatId">Unique id of the specific chat</param>
     /// <param name="contentType">Type of message to return</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Returns a random instance of <see cref="Message"/> of a certain type from the specific chat</returns>
+    /// <returns>Returns a random instance of <see cref="Message"/> of a certain type from the specific chat or null if there is no messages in the chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with the specific id doesn't exist</exception>
-    Task<Message> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType, CancellationToken cancellationToken=default);
+    Task<Message?> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType, CancellationToken cancellationToken=default);
 
     /// <summary>
     /// Asynchronous method that checks if there is already a message with this content and content type in the chat

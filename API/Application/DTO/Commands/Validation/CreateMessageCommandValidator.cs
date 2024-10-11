@@ -8,7 +8,7 @@ public class CreateMessageCommandValidator : AbstractValidator<CreateMessageComm
     public CreateMessageCommandValidator() {
         RuleFor(command => command.Content).NotEmpty();
         RuleFor(command => command.Type).Must(
-            type => Enum.TryParse(typeof(ContentType), type, out _))
+            type => Enum.TryParse<ContentType>(type, true, out _))
                 .WithMessage("The value must be a valid content type");
     }
 }

@@ -10,8 +10,8 @@ public class CategoryValidationFilterAttribute : Attribute, IActionFilter {
     
     public void OnActionExecuting(ActionExecutingContext context) {
         if (context.HttpContext.GetRouteValue(RouteName) is string category)
-            if (!Enum.TryParse<ContentType>(category, out _))
-                context.Result = new BadRequestObjectResult("Category is incorrect");
+            if (!Enum.TryParse<ContentType>(category, true, out _))
+                context.Result = new BadRequestObjectResult(new ProblemDetails { Title = "Category is incorrect"});
     }
 
     public void OnActionExecuted(ActionExecutedContext context) { }

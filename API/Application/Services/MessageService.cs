@@ -23,15 +23,15 @@ public class MessageService(IMessageRepository messageRepository, IValidator<Cre
         => (await messageRepository.GetMessagesFromChatAsync(chatId, contentType, cancellationToken))
             .Select(message => message.ToViewModel());
 
-    public async Task<MessageViewModel> GetRandomMessageFromChatAsync(ulong chatId,
+    public async Task<MessageViewModel?> GetRandomMessageFromChatAsync(ulong chatId,
         CancellationToken cancellationToken=default)
         => (await messageRepository.GetRandomMessageFromChatAsync(chatId, cancellationToken))
-            .ToViewModel();
+            ?.ToViewModel();
 
-    public async Task<MessageViewModel> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType,
+    public async Task<MessageViewModel?> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType,
         CancellationToken cancellationToken=default)
         => (await messageRepository.GetRandomMessageFromChatAsync(chatId, contentType, cancellationToken))
-            .ToViewModel();
+            ?.ToViewModel();
 
     public async Task<bool> AddNewMessageAsync(ulong chatId, CreateMessageCommand command,
         CancellationToken cancellationToken=default) {
