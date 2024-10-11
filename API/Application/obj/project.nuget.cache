@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0AnTDr302yI7jBlx5xQp8CBMOl5qVKXu4uNdKu7TMSloGhxPih8WpjCq79IxObcwq0H2IdueIx3P/w6LTSegtQ==",
+  "success": true,
+  "projectFilePath": "/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Application/Application.csproj",
+  "expectedPackageFiles": [
+    "/Users/makaasz/.nuget/packages/fluentvalidation/11.10.0/fluentvalidation.11.10.0.nupkg.sha512"
+  ],
+  "logs": []
+}

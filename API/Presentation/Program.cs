@@ -1,6 +1,22 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using Presentation.Extensions;
 
-app.MapGet("/", () => "Hello World!");
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-app.Run();
+#region Configure Services
+
+builder.Services.AddProblemDetails();
+builder.Services.AddControllers();
+
+builder.Services.AddChats();
+builder.Services.AddMessages();
+
+builder.Services.AddApplicationDbContext(builder.Configuration);
+
+#endregion
+
+WebApplication application = builder.Build();
+
+application.UseStatusCodePages();
+application.MapControllers();
+
+application.Run();
