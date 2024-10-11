@@ -111,3 +111,9 @@
 /Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/bin/Debug/net8.0/Application.pdb
 /Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/bin/Debug/net8.0/Infrastructure.pdb
 /Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/bin/Debug/net8.0/Domain.pdb
+/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/bin/Debug/net8.0/Microsoft.OpenApi.dll
+/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/obj/Debug/net8.0/Presentation.MvcApplicationPartsAssemblyInfo.cs
+/Users/makaasz/Проекты/vitoBot/vitoBotAPI/API/Presentation/bin/Debug/net8.0/Presentation.xml
