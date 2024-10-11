@@ -7,6 +7,10 @@ using Presentation.Filters;
 
 namespace Presentation.Controllers;
 
+/// <summary>
+/// API Controller to interact with chats
+/// </summary>
+/// <param name="chatService">Required service to interact with chats</param>
 [ApiController]
 [Route("[controller]")]
 [CustomExceptionsHandlingFilter]
@@ -33,7 +37,7 @@ public class ChatsController(IChatService chatService) : ControllerBase {
     /// <param name="cancellationToken">Cancellation token</param>
     /// <response code="200">Returns all registered chats</response>
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<MessageViewModel>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<ChatViewModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetChats(CancellationToken cancellationToken) 
         => Ok(await chatService.GetChatsAsync(cancellationToken));
 }

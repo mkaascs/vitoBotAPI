@@ -32,7 +32,7 @@ internal static class ServiceCollectionExtensions {
     public static IServiceCollection AddApplicationDbContext(this IServiceCollection services,
         IConfiguration configuration) {
         
-        string? connectionString = configuration.GetConnectionString("VitoBotDb");
+        string connectionString = "Server=127.0.0.1;Uid=root;Pwd=makas1506;Database=VitoBot";
         services.AddDbContext<ApplicationDbContext>(options
             => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 

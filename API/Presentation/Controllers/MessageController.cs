@@ -10,6 +10,10 @@ using Presentation.Filters;
 
 namespace Presentation.Controllers;
 
+/// <summary>
+/// API Controller to interact with messages
+/// </summary>
+/// <param name="messageService">Required service to interact with messages</param>
 [ApiController]
 [Route("chats/{id}")]
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -71,7 +75,7 @@ public class MessageController(IMessageService messageService) : ControllerBase 
     /// <param name="category">Type of message</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <response code="200">Returns messages of a certain type from a specific chat</response>
-    /// <response code="400">Chat id is incorrect</response>
+    /// <response code="400">Chat id or category is incorrect</response>
     /// <response code="404">Chat was not found</response>
     [HttpGet("{category}")]
     [CategoryValidationFilter]
@@ -88,7 +92,7 @@ public class MessageController(IMessageService messageService) : ControllerBase 
     /// <param name="category">Type of message</param>
     /// <param name="cancellationToken">Chat id is incorrect</param>
     /// <response code="200">Returns random message of a certain type from a specific chat</response>
-    /// <response code="400">Chat id is incorrect</response>
+    /// <response code="400">Chat id or category is incorrect</response>
     /// <response code="404">Chat was not found</response>
     [HttpGet("{category}/random")]
     [CategoryValidationFilter]
