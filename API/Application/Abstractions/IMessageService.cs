@@ -24,11 +24,11 @@ public interface IMessageService {
     /// Asynchronous method to obtain instances of the <see cref="MessageViewModel"/> class of a certain type in a specific chat
     /// </summary>
     /// <param name="chatId">Unique id of the specific chat</param>
-    /// <param name="messageType">Message type to return</param>
+    /// <param name="contentType">Message type to return</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Returns a <see cref="IEnumerable{T}"/> of <see cref="MessageViewModel"/> instances of a certain type from the specific chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with current id doesn't exist</exception>
-    Task<IEnumerable<MessageViewModel>> GetMessagesFromChatAsync(ulong chatId, ContentType messageType, CancellationToken cancellationToken=default);
+    Task<IEnumerable<MessageViewModel>> GetMessagesFromChatAsync(ulong chatId, ContentType contentType, CancellationToken cancellationToken=default);
 
     /// <summary>
     /// Asynchronous method to obtain random instance of the <see cref="MessageViewModel"/> class in a specific chat
@@ -43,11 +43,11 @@ public interface IMessageService {
     /// Asynchronous method to obtain random instance of the <see cref="MessageViewModel"/> class of a certain type in a specific chat
     /// </summary>
     /// <param name="chatId">Unique id of the specific chat</param>
-    /// <param name="messageType">Message type to return</param>
+    /// <param name="contentType">Message type to return</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Returns a random instance of <see cref="MessageViewModel"/> of a certain type from the specific chat</returns>
     /// <exception cref="ChatWasNotFoundException">Throws if chat with current id doesn't exist</exception>
-    Task<MessageViewModel> GetRandomMessageFromChatAsync(ulong chatId, ContentType messageType, CancellationToken cancellationToken=default);
+    Task<MessageViewModel> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType, CancellationToken cancellationToken=default);
 
     /// <summary>
     /// Asynchronous method that adds a new instance of the <see cref="Domain.Entities.Message"/> class if there are no messages with this content and content type

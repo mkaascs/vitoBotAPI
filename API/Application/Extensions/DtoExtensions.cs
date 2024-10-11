@@ -1,0 +1,28 @@
+using Application.DTO.Commands;
+using Domain.Entities;
+using Domain.Entities.Enums;
+
+using Application.DTO.ViewModels;
+
+namespace Application.Extensions;
+
+internal static class DtoExtensions {
+    public static MessageViewModel ToViewModel(this Message message)
+        => new(message.Content,
+            message.Type.ToString());
+    
+    public static Message ToMessage(this CreateMessageCommand command)
+        => new() {
+            Content = command.Content,
+            Type = Enum.Parse<ContentType>(command.Type)
+        };
+
+    public static ChatViewModel ToViewModel(this Chat chat)
+        => new(chat.Id, chat.Name);
+
+    public static Chat ToChat(this RegisterChatCommand command)
+        => new() {
+            Id = command.Id,
+            Name = command.Name
+        };
+}

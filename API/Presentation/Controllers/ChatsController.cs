@@ -28,12 +28,13 @@ public class ChatsController(IChatService chatService) : ControllerBase {
     /// <param name="command">Instance of <see cref="RegisterChatCommand"/> to register new chat</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <response code="201">Chat was registered successfully</response>
-    /// <response code="400">Command model is incorrect</response>
+    /// <response code="400">Command model is incorrect. Also return if chat with this id already exists</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> RegisterChat(RegisterChatCommand command, CancellationToken cancellationToken) {
-        await chatService.RegisterNewChatAsync(command, cancellationToken);
-        return Created();
+        return await chatService.RegisterNewChatAsync(command, cancellationToken)
+            ? Created()
+            : BadRequest();
     }
 }

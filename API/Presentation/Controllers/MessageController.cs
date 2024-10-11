@@ -23,15 +23,16 @@ public class MessageController(IMessageService messageService) : ControllerBase 
     /// <param name="command">Instance of <see cref="CreateMessageCommand"/> to create new message</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <response code="201">Message was created successfully</response>
-    /// <response code="400">Chat id or command model is incorrect</response>
+    /// <response code="400">Chat id or command model is incorrect. Also return if message with this content already exists</response>
     /// <response code="404">Chat was not found</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> AddMessage(string id, CreateMessageCommand command,
         CancellationToken cancellationToken) {
         
-        await messageService.AddNewMessageAsync(ulong.Parse(id), command, cancellationToken);
-        return Created();
+        return await messageService.AddNewMessageAsync(ulong.Parse(id), command, cancellationToken)
+            ? Created()
+            : BadRequest();
     }
     
     /// <summary>
@@ -75,7 +76,6 @@ public class MessageController(IMessageService messageService) : ControllerBase 
     [HttpGet("/{category}")]
     [CategoryValidationFilter]
     [ProducesResponseType(typeof(MessageViewModel), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetMessages(string id, string category, CancellationToken cancellationToken)
         => Ok(await messageService.GetMessagesFromChatAsync(
             ulong.Parse(id), Enum.Parse<ContentType>(category), cancellationToken));
