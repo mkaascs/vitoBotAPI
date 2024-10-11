@@ -43,12 +43,12 @@ public class MessageService(IMessageRepository messageRepository, IValidator<Cre
             throw new ValidationProblemException(validationResult.ToDictionary());
         
         bool doesAlreadyExist = await messageRepository
-            .DoesAlreadyExist(command.ToMessage(), cancellationToken);
+            .DoesAlreadyExist(command.ToMessage(chatId), cancellationToken);
 
         if (doesAlreadyExist)
             return false;
 
-        await messageRepository.AddNewMessageAsync(command.ToMessage(), cancellationToken);
+        await messageRepository.AddNewMessageAsync(command.ToMessage(chatId), cancellationToken);
         return true;
     }
 }

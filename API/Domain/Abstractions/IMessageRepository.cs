@@ -47,11 +47,12 @@ public interface IMessageRepository {
     Task<Message> GetRandomMessageFromChatAsync(ulong chatId, ContentType contentType, CancellationToken cancellationToken=default);
 
     /// <summary>
-    /// Asynchronous method that checks if there is already a message with this content and content type
+    /// Asynchronous method that checks if there is already a message with this content and content type in the chat
     /// </summary>
     /// <param name="message">Instance of <see cref="Message"/>></param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Returns true if message with the content and content type already exists and false if it doesn't</returns>
+    /// <returns>Returns true if message with the content and content type already exists in the chat and false if it doesn't</returns>
+    /// <exception cref="ChatWasNotFoundException">Throws if chat with the specific id doesn't exist</exception>
     Task<bool> DoesAlreadyExist(Message message, CancellationToken cancellationToken=default);
 
     /// <summary>
@@ -59,5 +60,6 @@ public interface IMessageRepository {
     /// </summary>
     /// <param name="newMessage">Instance of <see cref="Message"/> which need to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
+    /// <exception cref="ChatWasNotFoundException">Throws if chat with the specific id doesn't exist</exception>
     Task AddNewMessageAsync(Message newMessage, CancellationToken cancellationToken=default);
 }

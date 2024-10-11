@@ -1,8 +1,8 @@
-using Application.DTO.Commands;
 using Domain.Entities;
 using Domain.Entities.Enums;
 
 using Application.DTO.ViewModels;
+using Application.DTO.Commands;
 
 namespace Application.Extensions;
 
@@ -11,8 +11,9 @@ internal static class DtoExtensions {
         => new(message.Content,
             message.Type.ToString());
     
-    public static Message ToMessage(this CreateMessageCommand command)
+    public static Message ToMessage(this CreateMessageCommand command, ulong chatId)
         => new() {
+            ChatId = chatId,
             Content = command.Content,
             Type = Enum.Parse<ContentType>(command.Type)
         };

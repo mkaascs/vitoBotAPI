@@ -10,7 +10,7 @@ namespace Presentation.Filters;
 public class CustomExceptionsHandlingFilterAttribute : Attribute, IExceptionFilter {
     public void OnException(ExceptionContext context) {
         context.Result = context.Exception switch {
-            ChatWasNotFoundException => new NotFoundObjectResult("Chat was not found"),
+            ChatWasNotFoundException exception => new NotFoundObjectResult($"Chat with id {exception.DesiredChatId} was not found"),
             ValidationProblemException validationProblems => new BadRequestObjectResult(validationProblems.Errors),
             _ => context.Result
         };
