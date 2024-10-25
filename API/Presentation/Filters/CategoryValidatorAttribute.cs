@@ -8,7 +8,8 @@ namespace Presentation.Filters;
 /// <summary>
 /// Filter to check category value is valid
 /// </summary>
-public class CategoryValidationFilterAttribute : Attribute, IActionFilter {
+public class CategoryValidatorAttribute : Attribute, IActionFilter
+{
     /// <summary>
     /// A route name of category value
     /// </summary>
@@ -18,7 +19,8 @@ public class CategoryValidationFilterAttribute : Attribute, IActionFilter {
     /// Checking category value
     /// </summary>
     /// <param name="context">An action context</param>
-    public void OnActionExecuting(ActionExecutingContext context) {
+    public void OnActionExecuting(ActionExecutingContext context) 
+    {
         if (context.HttpContext.GetRouteValue(RouteName) is string category)
             if (!Enum.TryParse<ContentType>(category, true, out _))
                 context.Result = new BadRequestObjectResult(new ProblemDetails { Title = "Category is incorrect"});

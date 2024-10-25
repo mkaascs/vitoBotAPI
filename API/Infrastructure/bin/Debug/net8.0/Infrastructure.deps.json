@@ -545,6 +545,9 @@
       },
       "System.Threading.Channels/6.0.0": {},
       "Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.10"
+        },
         "runtime": {
           "Domain.dll": {}
         }

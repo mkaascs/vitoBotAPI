@@ -22,7 +22,7 @@
             </summary>
             <param name="command">Instance of <see cref="T:Application.DTO.Commands.RegisterChatCommand"/> to register new chat</param>
             <param name="cancellationToken">Cancellation token</param>
-            <response code="204">Chat was registered successfully</response>
+            <response code="201">Chat was registered successfully</response>
             <response code="400">Command model is incorrect. Also return if chat with this id already exists</response>
         </member>
         <member name="M:Presentation.Controllers.ChatsController.GetChats(System.Threading.CancellationToken)">
@@ -32,30 +32,39 @@
             <param name="cancellationToken">Cancellation token</param>
             <response code="200">Returns all registered chats</response>
         </member>
-        <member name="T:Presentation.Controllers.MessageController">
+        <member name="M:Presentation.Controllers.ChatsController.GetChatById(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get chat by unique id
+            </summary>
+            <param name="chatId">Unique id of chat</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <response code="200">Returns found chat</response>
+            <response code="404">Chat with this id not found</response>
+        </member>
+        <member name="T:Presentation.Controllers.MessagesController">
             <summary>
             API Controller to interact with messages
             </summary>
             <param name="messageService">Required service to interact with messages</param>
         </member>
-        <member name="M:Presentation.Controllers.MessageController.#ctor(Application.Abstractions.IMessageService)">
+        <member name="M:Presentation.Controllers.MessagesController.#ctor(Application.Abstractions.IMessageService)">
             <summary>
             API Controller to interact with messages
             </summary>
             <param name="messageService">Required service to interact with messages</param>
         </member>
-        <member name="M:Presentation.Controllers.MessageController.AddMessage(System.String,Application.DTO.Commands.CreateMessageCommand,System.Threading.CancellationToken)">
+        <member name="M:Presentation.Controllers.MessagesController.AddMessage(System.String,Application.DTO.Commands.CreateMessageCommand,System.Threading.CancellationToken)">
             <summary>
             Adds new message in a specific chat
             </summary>
             <param name="id">ID of a specific chat</param>
             <param name="command">Instance of <see cref="T:Application.DTO.Commands.CreateMessageCommand"/> to create new message</param>
             <param name="cancellationToken">Cancellation token</param>
-            <response code="204">Message was created successfully</response>
+            <response code="201">Message was created successfully</response>
             <response code="400">Chat id or command model is incorrect. Also return if message with this content already exists</response>
             <response code="404">Chat was not found</response>
         </member>
-        <member name="M:Presentation.Controllers.MessageController.GetMessages(System.String,System.Threading.CancellationToken)">
+        <member name="M:Presentation.Controllers.MessagesController.GetMessages(System.String,System.Threading.CancellationToken)">
             <summary>
             Get all messages from a specific chat
             </summary>
@@ -63,9 +72,8 @@
             <param name="cancellationToken">Cancellation token</param>
             <response code="200">Returns all messages from a specific chat</response>
             <response code="400">Chat id is incorrect</response>
-            <response code="404">Chat was not found</response>
         </member>
-        <member name="M:Presentation.Controllers.MessageController.GetRandomMessage(System.String,System.Threading.CancellationToken)">
+        <member name="M:Presentation.Controllers.MessagesController.GetRandomMessage(System.String,System.Threading.CancellationToken)">
             <summary>
             Get random message from a specific chat
             </summary>
@@ -73,9 +81,9 @@
             <param name="cancellationToken">Cancellation token</param>
             <response code="200">Returns random message from a specific chat</response>
             <response code="400">Chat id is incorrect</response>
-            <response code="404">Chat was not found</response>
+            <response code="404">There are no messages in this chat</response>
         </member>
-        <member name="M:Presentation.Controllers.MessageController.GetMessages(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Presentation.Controllers.MessagesController.GetMessages(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get all messages of a certain type from a specific chat
             </summary>
@@ -84,9 +92,8 @@
             <param name="cancellationToken">Cancellation token</param>
             <response code="200">Returns messages of a certain type from a specific chat</response>
             <response code="400">Chat id or category is incorrect</response>
-            <response code="404">Chat was not found</response>
         </member>
-        <member name="M:Presentation.Controllers.MessageController.GetRandomMessage(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Presentation.Controllers.MessagesController.GetRandomMessage(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get random message of a certain type from a specific chat
             </summary>
@@ -95,58 +102,58 @@
             <param name="cancellationToken">Chat id is incorrect</param>
             <response code="200">Returns random message of a certain type from a specific chat</response>
             <response code="400">Chat id or category is incorrect</response>
-            <response code="404">Chat was not found</response>
+            <response code="404">There are no messages in this chat</response>
         </member>
-        <member name="T:Presentation.Filters.CategoryValidationFilterAttribute">
+        <member name="T:Presentation.Filters.CategoryValidatorAttribute">
             <summary>
             Filter to check category value is valid
             </summary>
         </member>
-        <member name="P:Presentation.Filters.CategoryValidationFilterAttribute.RouteName">
+        <member name="P:Presentation.Filters.CategoryValidatorAttribute.RouteName">
             <summary>
             A route name of category value
             </summary>
         </member>
-        <member name="M:Presentation.Filters.CategoryValidationFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+        <member name="M:Presentation.Filters.CategoryValidatorAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>
             Checking category value
             </summary>
             <param name="context">An action context</param>
         </member>
-        <member name="M:Presentation.Filters.CategoryValidationFilterAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+        <member name="M:Presentation.Filters.CategoryValidatorAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
             <summary>
             After call action
             </summary>
             <param name="context">An action context</param>
         </member>
-        <member name="T:Presentation.Filters.CustomExceptionsHandlingFilterAttribute">
+        <member name="T:Presentation.Filters.CustomExceptionsHandlerAttribute">
             <summary>
             Exception filter to catch custom exceptions and return status codes
             </summary>
         </member>
-        <member name="M:Presentation.Filters.CustomExceptionsHandlingFilterAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+        <member name="M:Presentation.Filters.CustomExceptionsHandlerAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
             <summary>
             Catch custom exceptions and return status codes
             </summary>
             <param name="context">An exception context</param>
         </member>
-        <member name="T:Presentation.Filters.IdValidationFilterAttribute">
+        <member name="T:Presentation.Filters.IdValidatorAttribute">
             <summary>
             Filter to check id value is valid
             </summary>
         </member>
-        <member name="P:Presentation.Filters.IdValidationFilterAttribute.RouteName">
+        <member name="P:Presentation.Filters.IdValidatorAttribute.RouteName">
             <summary>
             A route name of id value
             </summary>
         </member>
-        <member name="M:Presentation.Filters.IdValidationFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+        <member name="M:Presentation.Filters.IdValidatorAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>
             Checking id value
             </summary>
             <param name="context">An action context</param>
         </member>
-        <member name="M:Presentation.Filters.IdValidationFilterAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+        <member name="M:Presentation.Filters.IdValidatorAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
             <summary>
             After call action
             </summary>

@@ -1,5 +1,6 @@
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 
 using Application.Abstractions;
 using Application.DTO.Commands;
@@ -8,28 +9,47 @@ using Application.Exceptions;
 using Application.Extensions;
 
 using Domain.Abstractions;
+using Domain.Entities;
+using Domain.Exceptions;
 
 namespace Application.Services;
 
-public class ChatService(IChatRepository chatRepository, IValidator<RegisterChatCommand> chatValidator) : IChatService {
-    public async Task<IEnumerable<ChatViewModel>> GetChatsAsync(CancellationToken cancellationToken = default)
-        => (await chatRepository.GetChatsAsync(cancellationToken))
-            .Select(chat => chat.ToViewModel());
+public class ChatService(
+    IRepository<Chat> chatRepository,
+    IValidator<RegisterChatCommand> chatValidator) : IChatService
+{
+    public async ValueTask<IEnumerable<ChatViewModel>> GetChatsAsync(CancellationToken cancellationToken = default)
+    {
+        return await chatRepository.Entities
+            .Select(chat => chat.ToViewModel())
+            .ToListAsync(cancellationToken);
+    }
 
-    public async Task<bool> RegisterNewChatAsync(RegisterChatCommand command, CancellationToken cancellationToken = default) {
-        ValidationResult validationResult = await chatValidator
-            .ValidateAsync(command, cancellationToken);
+    public async ValueTask<ChatViewModel> GetChatByIdAsync(ulong chatId, CancellationToken cancellationToken = default)
+    {
+        ChatViewModel? foundChat = await chatRepository.Entities
+            .Where(chat => chat.Id.Equals(chatId))
+            .Select(chat => chat.ToViewModel())
+            .FirstOrDefaultAsync(cancellationToken);
+
+        return foundChat ?? throw new ChatNotFoundException(chatId);
+    }
+
+    public async ValueTask<bool> RegisterNewChatAsync(RegisterChatCommand command, CancellationToken cancellationToken = default)
+    {
+        ValidationResult validationResult = chatValidator.Validate(command);
 
         if (!validationResult.IsValid)
             throw new ValidationProblemException(validationResult.ToDictionary());
 
-        bool doesAlreadyExist = await chatRepository
-            .DoesAlreadyExist(command.ToChat(), cancellationToken);
+        bool doesExist = await chatRepository.Entities
+            .AnyAsync(chat => chat.Id.Equals(command.Id), cancellationToken);
 
-        if (doesAlreadyExist)
+        if (doesExist) 
             return false;
 
-        await chatRepository.CreateChatAsync(command.ToChat(), cancellationToken);
-        return true;
+        chatRepository.Entities.Add(command.ToDomainModel());
+        await chatRepository.SaveChangesAsync(cancellationToken);
+        return !cancellationToken.IsCancellationRequested;
     }
 }

@@ -1,6 +1,7 @@
 namespace Domain.Entities.Enums;
 
-public enum ContentType {
+public enum ContentType 
+{
     Text,
     Gif,
     Picture,

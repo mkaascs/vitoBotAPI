@@ -10,14 +10,16 @@ namespace Presentation.Filters;
 /// <summary>
 /// Exception filter to catch custom exceptions and return status codes
 /// </summary>
-public class CustomExceptionsHandlingFilterAttribute : Attribute, IExceptionFilter {
+public class CustomExceptionsHandlerAttribute : Attribute, IExceptionFilter
+{
     /// <summary>
     /// Catch custom exceptions and return status codes
     /// </summary>
     /// <param name="context">An exception context</param>
-    public void OnException(ExceptionContext context) {
+    public void OnException(ExceptionContext context)
+    {
         context.Result = context.Exception switch {
-            ChatWasNotFoundException exception => 
+            ChatNotFoundException exception => 
                 new NotFoundObjectResult(new ProblemDetails { Title = "Chat was not found"}),
             
             ValidationProblemException validationProblems => 

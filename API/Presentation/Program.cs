@@ -1,11 +1,11 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 using Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 #region Configure Services
-
-builder.Services.AddProblemDetails();
-builder.Services.AddControllers();
 
 builder.Services.AddChats();
 builder.Services.AddMessages();
@@ -13,7 +13,14 @@ builder.Services.AddMessages();
 builder.Services.AddSwaggerGen(options 
     => options.AddSwaggerDocumentation());
 
+builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 builder.Services.AddApplicationDbContext(builder.Configuration);
 

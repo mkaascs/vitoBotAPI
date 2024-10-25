@@ -1,14 +1,20 @@
 using FluentValidation;
 
-using Domain.Entities.Enums;
-
 namespace Application.DTO.Commands.Validation;
 
-public class CreateMessageCommandValidator : AbstractValidator<CreateMessageCommand> {
-    public CreateMessageCommandValidator() {
-        RuleFor(command => command.Content).NotEmpty();
-        RuleFor(command => command.Type).Must(
-            type => Enum.TryParse<ContentType>(type, true, out _))
-                .WithMessage("The value must be a valid content type");
+public class CreateMessageCommandValidator : AbstractValidator<CreateMessageCommand> 
+{
+    public CreateMessageCommandValidator() 
+    {
+        RuleFor(command => command.Content)
+            .NotEmpty();
+
+        RuleFor(command => command.Content.Length)
+            .ExclusiveBetween(1, 4096)
+            .WithMessage("Content length must not exceed 4096");
+            
+        RuleFor(command => command.Type)
+            .IsInEnum()
+            .WithMessage("The value must be a valid content type");
     }
 }

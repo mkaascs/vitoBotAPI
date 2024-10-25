@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
+using Domain.Entities;
 using Domain.Abstractions;
 
 using Application.Abstractions;
@@ -13,29 +14,32 @@ using Infrastructure.Repositories;
 
 namespace Presentation.Extensions;
 
-internal static class ServiceCollectionExtensions {
-    public static IServiceCollection AddMessages(this IServiceCollection services) {
-        services.AddScoped<IMessageRepository, MessageRepository>();
+internal static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddMessages(this IServiceCollection services) 
+    {
+        services.AddScoped<IRepository<Message>, MessageRepository>();
         services.AddScoped<IMessageService, MessageService>();
         services.AddScoped<IValidator<CreateMessageCommand>, CreateMessageCommandValidator>();
-        return services;
-    }
-
-    public static IServiceCollection AddChats(this IServiceCollection services) {
-        services.AddScoped<IChatService, ChatService>();
-        services.AddScoped<ChatRepository>();
-        services.AddScoped<IChatRepository, ChatRepository>();
-        services.AddScoped<IValidator<RegisterChatCommand>, RegisterChatCommandValidator>();
-        return services;
-    }
-
-    public static IServiceCollection AddApplicationDbContext(this IServiceCollection services,
-        IConfiguration configuration) {
         
-        string connectionString = "Server=127.0.0.1;Uid=root;Pwd=makas1506;Database=VitoBot";
+        return services;
+    }
+
+    public static IServiceCollection AddChats(this IServiceCollection services) 
+    {
+        services.AddScoped<IRepository<Chat>, ChatRepository>();
+        services.AddScoped<IChatService, ChatService>();
+        services.AddScoped<IValidator<RegisterChatCommand>, RegisterChatCommandValidator>();
+        
+        return services;
+    }
+
+    public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration configuration)
+    {
+        string? connectionString = configuration.GetConnectionString("VitoDbConnectionString");
         services.AddDbContext<ApplicationDbContext>(options
             => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-
+        
         return services;
     }
 }

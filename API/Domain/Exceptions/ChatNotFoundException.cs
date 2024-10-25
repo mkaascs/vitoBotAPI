@@ -1,6 +1,7 @@
 namespace Domain.Exceptions;
 
-public class ChatWasNotFoundException(ulong desiredChatId) : Exception {
+public class ChatNotFoundException(ulong desiredChatId) : Exception 
+{
     /// <summary>
     /// ID of the chat you are looking for, which does not exist
     /// </summary>
